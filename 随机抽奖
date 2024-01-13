@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>随机抽奖程序</title>
+<style>
+  body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  #prizeContainer {
+    margin-top: 20px;
+  }
+  .prize {
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+  }
+  .first-prize {
+    color: #d4af37;
+  }
+  .second-prize {
+    color: #c0c0c0;
+  }
+  .third-prize {
+    color: #cd7f32;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  input[type="text"] {
+    padding: 5px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>随机抽奖程序</h1>
+<p>请输入您的姓名：</p>
+<input type="text" id="userName" placeholder="姓名">
+<button onclick="drawLottery()">抽奖</button>
+<div id="prizeContainer"></div>
+
+<script>
+  function drawLottery() {
+    const userName = document.getElementById('userName').value.trim();
+    if (!userName) {
+      alert('请输入您的姓名！');
+      return;
+    }
+
+    const prizes = [
+      { name: '一等奖', reward: 'MacBook Pro' },
+      { name: '二等奖', reward: 'iPhone' },
+      { name: '三等奖', reward: 'AirPods' }
+    ];
+
+    const prizeIndex = Math.floor(Math.random() * prizes.length);
+    const selectedPrize = prizes[prizeIndex];
+
+    const prizeContainer = document.getElementById('prizeContainer');
+    prizeContainer.innerHTML = `
+      <div class="prize ${selectedPrize.name.toLowerCase().replace('等奖', '-prize')}">
+        <h2>${selectedPrize.name}</h2>
+        <p>${userName}，恭喜你获得: ${selectedPrize.reward}</p>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
